@@ -1,0 +1,33 @@
+name: get_latest_tag
+
+on:
+  schedule:
+  - cron: '0 */1 * * *'
+  workflow_dispatch:
+
+jobs:
+  get-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.TOKEN }}
+
+      - name: Fetch release version
+        run: |
+          version=$(curl -sL  https://api.github.com/repos/smithy9901/build_peervpn/tags| jq -r '.[0].name') \
+          && if [ $version != "null" ]; then echo $version > latest-tag/latest.txt ; fi
+
+      - name: Check for modified files
+        id: git-check
+        run: |
+          echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
+
+      - name: Commit latest tag file
+        uses: stefanzweifel/git-auto-commit-action@v4
+        if: steps.git-check.outputs.modified == 'true'
+        with:
+          commit_message: update latest tag
+          repository: ./
+          file_pattern: ./latest-tag/*.txt
