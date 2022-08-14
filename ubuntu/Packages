@@ -6,10 +6,10 @@ Maintainer: smithy9901
 Installed-Size: 92
 Depends: libssl1.0-dev
 Filename: ./peervpn.deb
-Size: 37816
-MD5sum: 7e943943dc868733d9fa42c7f2d2dc13
-SHA1: 4e686169535dfc0a660797f10775808ed87afc0e
-SHA256: a51f6dfa2c9baae3adba8087378700ded542dc956d19bfbd75ee9bc152518159
+Size: 37800
+MD5sum: 717740f7253cea311ec503f98b3b8e07
+SHA1: e0a191af817572f5a69808d8acaeeba4e787e890
+SHA256: a62ba798c7ebba177ec04451c7157527de535d32c561c4c386cf203cb91f006e
 Section: vpn
 Priority: optional
 Description: Open source peer-to-peer VPN
